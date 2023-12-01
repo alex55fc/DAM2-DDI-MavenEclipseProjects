@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thyneleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+
+<body>
+	<div style="display: table; margin:auto; margin-top:200px; border: solid 1px black; width: 50%;">
+		<span>Insertar Duenio con su mascota</span>
+		<br>
+		<form th:action="@{/insertDuenio}" th:object="${dueniox}">
+			<span>Dni:</span>
+			<input type="number" th:field="*{dni}"/>
+			<span>Nombre:</span>
+			<input type="text" th:field="*{nombre}"/>
+			<input type="submit" value="Enviar datos"/>
+		</form>
+	</div>
+</body>
+</html>

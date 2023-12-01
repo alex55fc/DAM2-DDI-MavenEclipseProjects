@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thyneleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--Duenio-->
+	<table border="1px" style="display: table; margin:auto; margin-top:100px; width: 50%;border-collapse: collapse;">
+		<h3 th:text="${mensaje}"></h3>
+		<h1>Duenio</h1>
+		<th>DNI</th>
+		<th>Nombre</th>	
+		<th colspan="2">Acciones</th>
+		<tbody>
+			<tr th:each="dueniox: ${listaDuenios}">
+				<td th:text="${dueniox.dni}"/>
+				<td th:text="${dueniox.nombre}"/>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
