@@ -17,6 +17,7 @@
 				<td th:text="${dueniox.dni}"/>
 				<td th:text="${dueniox.nombre}"/>
 				<td><a th:href="@{'/findDuenio/'+${dueniox.dni}}">Update</a></td>
+				<td><a th:href="@{'/deleteDuenioByDni/'+${dueniox.dni}}">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

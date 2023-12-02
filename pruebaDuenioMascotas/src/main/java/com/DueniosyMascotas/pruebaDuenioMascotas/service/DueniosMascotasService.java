@@ -46,6 +46,10 @@ public class DueniosMascotasService {
 		duenioRepo.update(dueniox);
 		return dueniox;
 	}
+	public void delelteDuenio(Duenio dueniox) {
+		duenioRepo.deleteDuenio(dueniox);
+		
+	}
 	
 	
 	

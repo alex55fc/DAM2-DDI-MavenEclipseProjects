@@ -53,6 +53,9 @@ public class DueniosMascotasController {
 		return "fin";	
 			
 	}
+	/*Uso dos metodos para UpdateDuenio ya que el primer  metodo unicamentelo encuentraal duenio por dni
+	 * luego lo mete en un objetoy para nosotros poder cambiar la info de ese objeto envio a otra vista paraahi darle
+	 * nuevos valores al objeto, luego uso el VERDADERO update y ahi si lo envio a la vista fin */
 	@RequestMapping("/findDuenio/{dni}")
 	public String findDuenio(@PathVariable Integer dni, Model model) {
 		Duenio dueniox = service.findDuenioByDni(dni);
@@ -67,6 +70,19 @@ public class DueniosMascotasController {
 		
 		service.updateDuenio(dueniox);
 		model.addAttribute("mensaje", "Duenio uploaded");
+		
+		List<Duenio> listaDuenio = service.listaDuenio();
+		model.addAttribute("listaDuenios", listaDuenio);		
+		return "fin";
+	}
+	/*En estedelete como no necesito rellenar otros datos en un avista aparte puedo hacerlo todo en el mismo meteodo,
+	 * no de la forma que yo quisiera que seria, usar un metodo findDuenioByDni y queeso usarlo tanto para update como para delete
+	 * porque por como es este ejercicio no se hacerlo,tengo que upgradearlo  luego de examenes*/
+	@RequestMapping("/deleteDuenioByDni/{dni}")
+	public String deleteDuenioByDni(@PathVariable Integer dni,Model model) {
+		Duenio dueniox = service.findDuenioByDni(dni);
+		service.delelteDuenio(dueniox);
+		model.addAttribute("mensaje", "Duenio eliminated");
 		
 		List<Duenio> listaDuenio = service.listaDuenio();
 		model.addAttribute("listaDuenios", listaDuenio);		

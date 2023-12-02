@@ -38,5 +38,8 @@ public class DueniosMascotaRepository {
 		jdbcTemplate.update("UPDATE duenio SET nombre = ? WHERE dni = ?;",
 				 duenio.getNombre(), duenio.getDni());
 	}
+	public void deleteDuenio(Duenio duenio) {
+		jdbcTemplate.update("DELETE FROM duenio WHERE dni=?", duenio.getDni() );
+	}
 	
 }
