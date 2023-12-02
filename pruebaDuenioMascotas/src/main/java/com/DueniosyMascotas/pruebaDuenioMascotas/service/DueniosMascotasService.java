@@ -15,7 +15,7 @@ import com.DueniosyMascotas.pruebaDuenioMascotas.repository.DueniosMascotaReposi
 public class DueniosMascotasService {
 	//IMPORTANTE PARA EL REPOSITORY
 	@Autowired
-	DueniosMascotaRepository repo;
+	DueniosMascotaRepository duenioRepo;
 	
 	//aun no lo usare
 	@Autowired
@@ -25,17 +25,26 @@ public class DueniosMascotasService {
 		System.out.println("name:"+ dueniox.getNombre() );
 		//NO hace falta comprobacion de la primery key(dni) ya que si existe la misma PK salta una sqlException
 			//send to repository
-			repo.insert(dueniox);
+			duenioRepo.insert(dueniox);
 			//report.setMensaje("Insert");
 		
 	}
 	//metodo que nos devuelva todos los Duenios
 	public List<Duenio> listaDuenio (){
-		List<Duenio> listaDuenio = repo.findAll();
+		List<Duenio> listaDuenio = duenioRepo.findAll();
 		for (Duenio dueniox : listaDuenio) {
 			System.out.println(dueniox.getDni() + dueniox.getNombre());		
 		}
 		return listaDuenio;
+	}
+	public Duenio findDuenioByDni(Integer dni) {
+		//primero buscamos el dni del duenio y lo traemos en el obejto  
+		Duenio dueniox = duenioRepo.findDuenioByDni(dni);
+		return dueniox;
+	}
+	public Duenio updateDuenio(Duenio dueniox) {
+		duenioRepo.update(dueniox);
+		return dueniox;
 	}
 	
 	

@@ -16,6 +16,7 @@
 			<tr th:each="dueniox: ${listaDuenios}">
 				<td th:text="${dueniox.dni}"/>
 				<td th:text="${dueniox.nombre}"/>
+				<td><a th:href="@{'/findDuenio/'+${dueniox.dni}}">Update</a></td>
 			</tr>
 		</tbody>
 	</table>

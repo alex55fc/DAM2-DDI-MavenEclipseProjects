@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.Duenio;
@@ -45,13 +46,31 @@ public class DueniosMascotasController {
 	public String insertDuenio(Duenio duenio, Model model) {
 		
 		service.insertDuenio(duenio);
-		model.addAttribute("mensaje", "Duenio insertado");
+		model.addAttribute("mensaje", "Duenio added");
 		
 		List<Duenio> listaDuenio = service.listaDuenio();
 		model.addAttribute("listaDuenios", listaDuenio);
 		return "fin";	
 			
 	}
-
+	@RequestMapping("/findDuenio/{dni}")
+	public String findDuenio(@PathVariable Integer dni, Model model) {
+		Duenio dueniox = service.findDuenioByDni(dni);
+		//aqui le pasamos nuestro objeto para hacer el update con los datos del Duenio con ese dni
+		model.addAttribute("dueniox", dueniox);
+		
+		return "updateView";
+	}
+	
+	@RequestMapping("/updateDuenio")
+	public String updateDuenio(Duenio dueniox, Model model) {
+		
+		service.updateDuenio(dueniox);
+		model.addAttribute("mensaje", "Duenio uploaded");
+		
+		List<Duenio> listaDuenio = service.listaDuenio();
+		model.addAttribute("listaDuenios", listaDuenio);		
+		return "fin";
+	}
 	
 }

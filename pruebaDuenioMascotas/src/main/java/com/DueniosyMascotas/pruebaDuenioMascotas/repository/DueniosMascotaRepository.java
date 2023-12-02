@@ -24,4 +24,19 @@ public class DueniosMascotaRepository {
 	public List<Duenio> findAll(){
 		return jdbcTemplate.query("SELECT * FROM duenio", new DuenioRowMapper());
 	}
+	//encontrar duenio por dni y devolver objeto 
+	public Duenio findDuenioByDni(long dni) {
+		return jdbcTemplate.queryForObject("SELECT * FROM duenio WHERE dni =?"
+				, new DuenioRowMapper(),dni);
+		/*yo no uso BeanPropertyRowMapper como lo hace Gorka, no lo veo necesario
+		 * BeanPropertyRowMapper , que es un RowMapper especial provisto por Spring que mapea automáticamente las columnas del resultado
+		 *  de la consulta a las propiedades de la clase */
+		
+	}
+	public void update(Duenio duenio) {
+		//ponemos el objeto vacio que teniamos al inicio en el controlador
+		jdbcTemplate.update("UPDATE duenio SET nombre = ? WHERE dni = ?;",
+				 duenio.getNombre(), duenio.getDni());
+	}
+	
 }
