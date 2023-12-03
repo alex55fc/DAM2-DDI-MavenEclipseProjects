@@ -32,6 +32,7 @@ public class DueniosMascotasController {
 		return "index";
 		
 	}
+	//Metodos  para Duenios
 	/*
 	 * buscar manera de hacerlo asi y con el Report report
 	@RequestMapping("/listaDuenio")
@@ -88,5 +89,15 @@ public class DueniosMascotasController {
 		model.addAttribute("listaDuenios", listaDuenio);		
 		return "fin";
 	}
-	
+	//Metodos para Mascotas
+	//no voy a manegar la excepcion de escoger un Duenio que no exista, dejare que salte SQLException y no hare el catch
+	@RequestMapping("/insertMascota")
+	public String insertMascota(Mascota mascota, Model model) {
+		
+		service.insertMascota(mascota);
+		model.addAttribute("mensaje", "Mascota added");
+		
+		return "fin";	
+			
+	}	
 }

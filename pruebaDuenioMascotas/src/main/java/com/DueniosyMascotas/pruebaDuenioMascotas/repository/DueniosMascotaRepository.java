@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.Duenio;
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.DuenioRowMapper;
+import com.DueniosyMascotas.pruebaDuenioMascotas.model.Mascota;
 
 @Repository
 public class DueniosMascotaRepository {
@@ -15,6 +16,8 @@ public class DueniosMascotaRepository {
 	//IMPORTANTE
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	//metodos para Duenios
 	
 	public void insert(Duenio duenio) {
 		//ponemos el objeto vacio que teniamos al inicio en el controlador
@@ -42,4 +45,10 @@ public class DueniosMascotaRepository {
 		jdbcTemplate.update("DELETE FROM duenio WHERE dni=?", duenio.getDni() );
 	}
 	
+	//metodos para Mascotas
+	public void insertMascota(Mascota mascotax) {
+		//ponemos el objeto vacio que teniamos al inicio en el controlador
+		jdbcTemplate.update("insert into mascota(numChip, nombreMascota, duenio_dni, tieneChip ) values(?, ?, ? ,?);",
+				mascotax.getNumChip(), mascotax.getNombreMascota(), mascotax.getDuenio().getDni(), mascotax.isTieneChip());
+	}
 }

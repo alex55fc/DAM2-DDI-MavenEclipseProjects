@@ -7,13 +7,28 @@
 
 <body>
 	<div style="display: table; margin:auto; margin-top:200px; border: solid 1px black; width: 50%;">
-		<span>Insertar Duenio con su mascota</span>
+		<span>Insertar Duenio</span>
 		<br>
 		<form th:action="@{/insertDuenio}" th:object="${dueniox}">
 			<span>Dni:</span>
 			<input type="number" th:field="*{dni}"/>
 			<span>Nombre:</span>
 			<input type="text" th:field="*{nombre}"/>
+			<input type="submit" value="Enviar datos"/>
+		</form>
+	</div>
+	<div style="display: table; margin:auto; margin-top:200px; border: solid 1px black; width: 50%;">
+		<span>Insertar Mascota</span>
+		<br>
+		<form th:action="@{/insertMascota}" th:object="${mascotax}">
+			<span>Num chip:</span>
+			<input type="number" th:field="*{numChip}"/>
+			<span>Nombre  mascota:</span>
+			<input type="text" th:field="*{nombreMascota}"/>
+			<span>Tiene chip:</span>
+			<input type="checkbox" th:field="*{tieneChip}" th:checked="${tieneChip}" />
+			<span>Dni del Duenio:</span>
+			<input type="number" th:field="*{duenio.dni}"/>
 			<input type="submit" value="Enviar datos"/>
 		</form>
 	</div>

@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.DueniosyMascotas.pruebaDuenioMascotas.controller.Report;
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.Duenio;
-
-
+import com.DueniosyMascotas.pruebaDuenioMascotas.model.Mascota;
 import com.DueniosyMascotas.pruebaDuenioMascotas.repository.DueniosMascotaRepository;
 
 @Service
@@ -20,6 +19,8 @@ public class DueniosMascotasService {
 	//aun no lo usare
 	@Autowired
 	Report report;
+	
+	//metodos para Duenio 
 	
 	public void insertDuenio(Duenio dueniox){
 		System.out.println("name:"+ dueniox.getNombre() );
@@ -50,7 +51,15 @@ public class DueniosMascotasService {
 		duenioRepo.deleteDuenio(dueniox);
 		
 	}
+	//metodos para Mascotas
 	
+	public void insertMascota(Mascota mascotax){
+		System.out.println("name:"+ mascotax.getNombreMascota() );
+			//send to repository
+			duenioRepo.insertMascota(mascotax);;
+			//report.setMensaje("Insert");
+		
+	}	
 	
 	
 }
