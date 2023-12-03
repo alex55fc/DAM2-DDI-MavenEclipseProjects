@@ -60,6 +60,13 @@ public class DueniosMascotasService {
 			//report.setMensaje("Insert");
 		
 	}	
+	public List<Mascota> listaMascotas (){
+		List<Mascota> listaMascotas = duenioRepo.findAllMascotas();
+		for (Mascota mascotax : listaMascotas) {
+			System.out.println(mascotax.getNumChip() + mascotax.getNombreMascota() + mascotax.isTieneChip() +  mascotax.getDuenio().getDni());		
+		}
+		return listaMascotas;
+	}
 	
 	
 }

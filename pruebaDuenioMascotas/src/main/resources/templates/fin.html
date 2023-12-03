@@ -12,6 +12,7 @@
 		<table border="1px" style="display: table; margin:auto; margin-top:20px; width: 50%;border-collapse: collapse;">
 
 			<th>DNI</th>
+			<th>Nombre</th>	
 			<th colspan="2">Acciones</th>
 			<tbody>
 				<tr th:each="dueniox: ${listaDuenios}">
@@ -19,6 +20,26 @@
 					<td th:text="${dueniox.nombre}"/>
 					<td><a th:href="@{'/findDuenio/'+${dueniox.dni}}">Update</a></td>
 					<td><a th:href="@{'/deleteDuenioByDni/'+${dueniox.dni}}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="display: table; margin:auto; margin-top:200px; border: solid 1px black; width: 50%;">
+		<span>Mascotas</span>
+		<p th:text="${mensajeMascota}"></p>
+		<table border="1px" style="display: table; margin:auto; margin-top:20px; width: 50%;border-collapse: collapse;">
+
+			<th>Num chip</th>
+			<th>Nombre  mascota</th>	
+			<th>Dni Duenio propietario</th>	
+			<th>Tiene chip</th>	
+			<th colspan="2">Acciones</th>
+			<tbody>
+				<tr th:each="mascotax: ${listaMascotas}">
+					<td th:text="${mascotax.numChip}"/>
+					<td th:text="${mascotax.nombreMascota}"/>
+					<td th:text="${mascotax.duenio.dni}"></td>
+					<td th:text="${mascotax.tieneChip}"/>
 				</tr>
 			</tbody>
 		</table>

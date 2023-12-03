@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.Duenio;
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.DuenioRowMapper;
 import com.DueniosyMascotas.pruebaDuenioMascotas.model.Mascota;
+import com.DueniosyMascotas.pruebaDuenioMascotas.model.MascotaRowMapper;
+
 
 @Repository
 public class DueniosMascotaRepository {
@@ -51,4 +53,8 @@ public class DueniosMascotaRepository {
 		jdbcTemplate.update("insert into mascota(numChip, nombreMascota, duenio_dni, tieneChip ) values(?, ?, ? ,?);",
 				mascotax.getNumChip(), mascotax.getNombreMascota(), mascotax.getDuenio().getDni(), mascotax.isTieneChip());
 	}
+	public List<Mascota> findAllMascotas(){
+	    return jdbcTemplate.query("SELECT * FROM mascota", new MascotaRowMapper());
+	}
+
 }

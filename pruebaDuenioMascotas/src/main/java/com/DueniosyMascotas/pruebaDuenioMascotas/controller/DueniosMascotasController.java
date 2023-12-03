@@ -51,6 +51,9 @@ public class DueniosMascotasController {
 		
 		List<Duenio> listaDuenio = service.listaDuenio();
 		model.addAttribute("listaDuenios", listaDuenio);
+		
+		List<Mascota> listaMascota = service.listaMascotas();
+		model.addAttribute("listaMascotas", listaMascota);
 		return "fin";	
 			
 	}
@@ -74,6 +77,9 @@ public class DueniosMascotasController {
 		
 		List<Duenio> listaDuenio = service.listaDuenio();
 		model.addAttribute("listaDuenios", listaDuenio);		
+		
+		List<Mascota> listaMascota = service.listaMascotas();
+		model.addAttribute("listaMascotas", listaMascota);
 		return "fin";
 	}
 	/*En estedelete como no necesito rellenar otros datos en un avista aparte puedo hacerlo todo en el mismo meteodo,
@@ -86,7 +92,10 @@ public class DueniosMascotasController {
 		model.addAttribute("mensaje", "Duenio eliminated");
 		
 		List<Duenio> listaDuenio = service.listaDuenio();
-		model.addAttribute("listaDuenios", listaDuenio);		
+		model.addAttribute("listaDuenios", listaDuenio);	
+		
+		List<Mascota> listaMascota = service.listaMascotas();
+		model.addAttribute("listaMascotas", listaMascota);
 		return "fin";
 	}
 	//Metodos para Mascotas
@@ -95,8 +104,13 @@ public class DueniosMascotasController {
 	public String insertMascota(Mascota mascota, Model model) {
 		
 		service.insertMascota(mascota);
-		model.addAttribute("mensaje", "Mascota added");
+		model.addAttribute("mensajeMascota", "Mascota added");
 		
+		List<Mascota> listaMascota = service.listaMascotas();
+		model.addAttribute("listaMascotas", listaMascota);
+		
+		List<Duenio> listaDuenio = service.listaDuenio();
+		model.addAttribute("listaDuenios", listaDuenio);
 		return "fin";	
 			
 	}	
