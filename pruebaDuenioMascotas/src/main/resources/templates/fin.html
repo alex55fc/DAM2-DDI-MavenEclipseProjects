@@ -6,21 +6,22 @@
 </head>
 <body>
 	<!--Duenio-->
-	<table border="1px" style="display: table; margin:auto; margin-top:100px; width: 50%;border-collapse: collapse;">
-		<h3 th:text="${mensaje}"></h3>
-		<h1>Duenio</h1>
-		<th>DNI</th>
-		<th>Nombre</th>	
-		<th colspan="2">Acciones</th>
-		<tbody>
-			<tr th:each="dueniox: ${listaDuenios}">
-				<td th:text="${dueniox.dni}"/>
-				<td th:text="${dueniox.nombre}"/>
-				<td><a th:href="@{'/findDuenio/'+${dueniox.dni}}">Update</a></td>
-				<td><a th:href="@{'/deleteDuenioByDni/'+${dueniox.dni}}">Delete</a></td>
-			</tr>
-		</tbody>
-	</table>
+	<div style="display: table; margin:auto; margin-top:200px; border: solid 1px black; width: 50%;">
+		<span>Duenio</span>
+		<p th:text="${mensaje}"></p>
+		<table border="1px" style="display: table; margin:auto; margin-top:20px; width: 50%;border-collapse: collapse;">
 
+			<th>DNI</th>
+			<th colspan="2">Acciones</th>
+			<tbody>
+				<tr th:each="dueniox: ${listaDuenios}">
+					<td th:text="${dueniox.dni}"/>
+					<td th:text="${dueniox.nombre}"/>
+					<td><a th:href="@{'/findDuenio/'+${dueniox.dni}}">Update</a></td>
+					<td><a th:href="@{'/deleteDuenioByDni/'+${dueniox.dni}}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
