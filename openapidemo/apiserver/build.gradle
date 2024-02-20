@@ -1,0 +1,47 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "2.3.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+    id "org.openapi.generator" version "5.1.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.3.1.RELEASE'
+    implementation 'org.springframework:spring-context:5.2.7.RELEASE'
+    implementation 'org.reflections:reflections:0.9.12'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.8'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    mainClassName = 'com.xyz.openapi.server.Application'
+}
+
+// https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-gradle-plugin/README.adoc
+openApiGenerate {
+    inputSpec.set("$rootDir/api-docs.json")
+    outputDir.set("$rootDir/thinclient")
+
+    groupId.set("com.xyz.openapi")
+    id.set("openapi-thinclient")
+    version.set("0.0.1-SNAPSHOT")
+
+    apiPackage.set("com.xyz.openapi.thinclient.api")
+    invokerPackage.set("com.xyz.openapi.thinclient.invoker")
+    modelPackage.set("com.xyz.openapi.thinclient.model")
+
+    generatorName.set("java");
+    library.set("resttemplate")
+    configOptions.put("serializationLibrary", "jackson")
+}

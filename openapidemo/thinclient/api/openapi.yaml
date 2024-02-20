@@ -1,0 +1,242 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI Sample App
+  version: "1.0"
+servers:
+- description: Generated server url
+  url: http://localhost:8080
+tags:
+- description: API Endpoints to operate on Employee and Departments
+  name: Organization Controls
+paths:
+  /api/employees:
+    get:
+      operationId: getAllEmployees
+      parameters:
+      - explode: true
+        in: query
+        name: deptId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal Server Error
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EmployeeList'
+          description: OK
+      summary: "If departmentId is not passed, get all employees. Otherwise get employees\
+        \ from specific department."
+      tags:
+      - Organization Controls
+      x-accepts: '*/*'
+    post:
+      operationId: createEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/ContractEmployee'
+              - $ref: '#/components/schemas/RegularEmployee'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - Organization Controls
+      x-contentType: application/json
+      x-accepts: '*/*'
+    put:
+      operationId: updateEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/ContractEmployee'
+              - $ref: '#/components/schemas/RegularEmployee'
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - Organization Controls
+      x-contentType: application/json
+      x-accepts: '*/*'
+  /api/departments:
+    get:
+      operationId: getAllDepartments
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Department'
+                type: array
+          description: OK
+      tags:
+      - Organization Controls
+      x-accepts: '*/*'
+    post:
+      operationId: createDepartment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - Organization Controls
+      x-contentType: application/json
+      x-accepts: '*/*'
+  /api/employees/{id}:
+    get:
+      operationId: getEmployee
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/ContractEmployee'
+                - $ref: '#/components/schemas/RegularEmployee'
+          description: OK
+      tags:
+      - Organization Controls
+      x-accepts: '*/*'
+  /api/departments/{id}:
+    get:
+      operationId: getDepartment
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: OK
+      tags:
+      - Organization Controls
+      x-accepts: '*/*'
+components:
+  schemas:
+    ContractEmployee:
+      allOf:
+      - $ref: '#/components/schemas/Employee'
+      - $ref: '#/components/schemas/ContractEmployee_allOf'
+      type: object
+    Department:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    Employee:
+      discriminator:
+        propertyName: '@class'
+      example:
+        '@class': '@class'
+        name: name
+        id: id
+        department:
+          name: name
+          id: id
+        email: email
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        department:
+          $ref: '#/components/schemas/Department'
+        name:
+          type: string
+        '@class':
+          type: string
+      required:
+      - '@class'
+      type: object
+    RegularEmployee:
+      allOf:
+      - $ref: '#/components/schemas/Employee'
+      type: object
+    ErrorResponse:
+      properties:
+        success:
+          type: boolean
+        errorMsg:
+          type: string
+      type: object
+    EmployeeList:
+      example:
+        employees:
+        - '@class': '@class'
+          name: name
+          id: id
+          department:
+            name: name
+            id: id
+          email: email
+        - '@class': '@class'
+          name: name
+          id: id
+          department:
+            name: name
+            id: id
+          email: email
+      properties:
+        employees:
+          items:
+            $ref: '#/components/schemas/Employee'
+          type: array
+      type: object
+    ContractEmployee_allOf:
+      properties:
+        vendorId:
+          type: string
+        vendorName:
+          type: string
+      type: object
+

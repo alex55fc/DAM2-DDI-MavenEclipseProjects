@@ -1,0 +1,5 @@
+rootProject.name = 'openapidemo'
+include 'apiserver'
+include 'apiclient'
+include 'thinclient'
+
